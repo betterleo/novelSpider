@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<style>
+#header {
+    background-color:darkred;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#section {
+    text-align:left;
+    margin : 0.5in;
+    float:left;
+    padding:10px;
+    font-size: x-large;
+}
+#footer {
+    background-color:chocolate;
+    color:white;
+    clear:both;
+    text-align:center;
+    font-size: large;
+    padding:5px;
+}
+</style>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    {% if data.novel_name and data.author %}
+        <title>{{ data.novel_name }}--{{ data.author }}</title>
+    {% endif %}
+</head>
+<body  bgcolor="#deb887">
+<div id="header">
+<h1>{{ data.novel_name }}</h1>
+<h2>作者: {{ data.author }}</h2>
+</div>
+<div id="section">
+{% if data.img %}
+<img src="{{ url_for('static', filename='img/' + data.img) }}">
+{% endif %}
+<p>{{ data.novel_desc }}</p>
+
+<ul>
+{% for ch in data.chapter_list %}
+    <li><a href={{ data.novel_id + '/'+ch.chapter_id }}>{{ ch.chapter_name }}</a></li>
+{% endfor %}
+</ul>
+</div>
+</body>
+</html>

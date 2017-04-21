@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>小说志</title>
+    <style>
+
+        a {
+            TEXT-DECORATION: none
+        }
+
+        #title {
+            background-color: darkred;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: medium;
+        }
+
+        #section {
+            background-color: #deb887;
+            text-align: left;
+            margin: 0.5in;
+            float: left;
+            padding: 10px;
+            text-decoration: none;
+            text-decoration-color: azure;
+            font-size: medium;
+        }
+    </style>
+</head>
+<body bgcolor="#deb887">
+
+<table>
+{% for no in data %}
+    <tr><td><a href={{ no.novel_url }}>
+    <div id = "title">
+        <h3>{{ no.novel_name }}</h3>
+        <h4>作者: {{ no.author }}</h4>
+    </div></a>
+    </td></tr>
+    <tr><td><a href={{ no.novel_url }}>
+    <div id = "section">
+            {% if no.img %}
+                <img src="{{ url_for('static', filename='img/' + no.img) }}">
+            {% endif %}
+            <p>{{ no.novel_desc }}</p>
+    </div></a>
+    </td></tr>
+{% endfor %}
+</table>
+
+
+</body>
+</html>

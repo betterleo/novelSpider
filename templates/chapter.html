@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<style>
+#header {
+    background-color:darkred;
+    color:white;
+    text-align:center;
+    padding:5px;
+    border: solid;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+#section {
+    text-align:left;
+    margin : 0.5in;
+    float:left;
+    font-size: x-large;
+    padding:10px;
+}
+#footer {
+    background-color:darkred;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+    line-height:30px;
+    font-size: x-large;
+}
+</style>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ data.chapter_name }}</title>
+</head>
+<body bgcolor="#deb887" >
+<div id="header">
+<h1>{{ data.chapter_name }}</h1>
+</div>
+<div id = "section">
+    {% for data_ in data.content %}
+<p>{{ data_ }}</p>
+    {% endfor %}
+</div>
+<div id="footer">
+<a href={{ data.previous_chapter_id }}>上一页</a>
+<a href={{ data.back_to_index }}>返回列表</a>
+<a href={{ data.next_chapter_id }}>下一页</a>
+</div>
+</body>
+</html>
