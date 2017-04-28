@@ -19,16 +19,16 @@ class DB:
         :return:
         '''
         sql = '''
-                CREATE TABLE if not exists `website` (
-                  `website_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                  `website_name` varchar(255) NOT NULL,
-                  `website_url` varchar(255) NOT NULL,
-                  `website_type` varchar(255) DEFAULT NULL,
-                  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-                  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-                  PRIMARY KEY (`website_id`),
-                  UNIQUE KEY `n_id` (`website_id`)
-                ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+                 CREATE TABLE if not exists `website` (
+				  `website_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				  `website_name` varchar(255) NOT NULL,
+				  `website_url` varchar(255) NOT NULL,
+				  `website_type` varchar(255) DEFAULT NULL,
+				  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+				  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+				  PRIMARY KEY (`website_id`),
+				  UNIQUE KEY `n_id` (`website_id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
             '''
         DATABASE_OBJECT.query(sql)
 
@@ -80,21 +80,22 @@ class DB:
         :return:
         '''
         sql = '''
-            CREATE TABLE if not exists  `novel` (
-              `novel_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-              `novel_name` varchar(255) NOT NULL,
-              `novel_url` varchar(255) NOT NULL,
-              `novel_type` varchar(255) DEFAULT NULL,
-              `author` varchar(255) DEFAULT NULL,
-              `novel_desc` varchar(2048) DEFAULT NULL,
-              `website_id` bigint(20) NOT NULL,
-              `latest_chapter_name` varchar(255) DEFAULT NULL,
-              `latest_chapter_url` varchar(255) DEFAULT NULL,
-              `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-              `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-              PRIMARY KEY (`novel_id`),
-              UNIQUE KEY `n_id` (`novel_id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            CREATE TABLE if not exists `novel` (
+				  `novel_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+				  `novel_name` varchar(255) NOT NULL,
+				  `novel_url` varchar(255) NOT NULL,
+				  `novel_type` varchar(255) DEFAULT NULL,
+				  `author` varchar(255) DEFAULT NULL,
+				  `img` text,
+				  `novel_desc` varchar(2048) DEFAULT NULL,
+				  `website_id` bigint(20) NOT NULL,
+				  `latest_chapter_name` varchar(255) DEFAULT NULL,
+				  `latest_chapter_url` varchar(255) DEFAULT NULL,
+				  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+				  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+				  PRIMARY KEY (`novel_id`),
+				  UNIQUE KEY `n_id` (`novel_id`)
+				) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
         '''
         DATABASE_OBJECT.query(sql)
@@ -144,19 +145,22 @@ class DB:
 
     def create_chapter_table(self):
         sql='''
-            CREATE TABLE if not exists `chapter` (
-              `chapter_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-              `chapter_name` varchar(255) NOT NULL,
-              `chapter_url` varchar(255) NOT NULL,
-              `content` TEXT NOT NULL,
-              `previous_chapter_url` varchar(255) DEFAULT NULL,
-              `next_chapter_url` varchar(2048) DEFAULT NULL,
-              `novel_id` bigint(20) NOT NULL,
-              `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-              `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-              PRIMARY KEY (`chapter_id`),
-              UNIQUE KEY `c_id` (`chapter_id`)
-            ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+            CREATE TABLE if not exists `t_chapter` (
+			  `chapter_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+			  `chapter_name` varchar(255) NOT NULL,
+			  `chapter_url` varchar(255) NOT NULL,
+			  `content` text,
+			  `previous_chapter_id` bigint(20) DEFAULT NULL,
+			  `previous_chapter_url` varchar(255) DEFAULT NULL,
+			  `next_chapter_id` bigint(20) DEFAULT NULL,
+			  `next_chapter_url` varchar(2048) DEFAULT NULL,
+			  `novel_id` bigint(20) NOT NULL,
+			  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+			  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+			  PRIMARY KEY (`chapter_id`),
+			  UNIQUE KEY `t_c_id` (`chapter_id`),
+			  KEY `t_index_chapter_novel_id` (`novel_id`)
+			) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 
         '''
         DATABASE_OBJECT.query(sql)
 
